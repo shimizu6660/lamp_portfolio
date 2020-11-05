@@ -1,0 +1,82 @@
+nav{
+  border-right: solid 1px #DDDDDD;
+  max-width: 270px;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.menu {
+  max-width: 255px;
+}
+
+.menu a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: #000;
+}
+
+.nav_label {
+  display: block;
+  margin: 0 0 4px 0;
+  padding : 15px;
+  line-height: 1;
+  color :#fff;
+  background : #0000DD;
+  cursor :pointer;
+  box-shadow: inset 0 5px 15px 0 white;
+}
+
+.accordion {
+  display: none;
+}
+
+.menu ul {
+  margin: 0;
+  padding: 0;
+  background :#f4f4f4;
+  list-style: none;
+}
+
+.menu li {
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+#menu_bar01:checked ~ #links01 li,
+#menu_bar02:checked ~ #links02 li,
+#menu_bar03:checked ~ #links03 li,
+#menu_bar04:checked ~ #links04 li,
+#menu_bar05:checked ~ #links05 li,
+#menu_bar06:checked ~ #links06 li,
+#menu_bar07:checked ~ #links07 li,
+#menu_bar08:checked ~ #links08 li,
+#menu_bar09:checked ~ #links09 li,
+#menu_bar010:checked ~ #links010 li,
+#menu_bar011:checked ~ #links011 li,
+#menu_bar012:checked ~ #links012 li,
+#menu_bar013:checked ~ #links013 li,
+#menu_bar014:checked ~ #links014 li,
+#menu_bar015:checked ~ #links015 li,
+#menu_bar016:checked ~ #links016 li,
+#menu_bar017:checked ~ #links017 li,
+#menu_bar018:checked ~ #links018 li,
+#menu_bar019:checked ~ #links019 li,
+#menu_bar020:checked ~ #links020 li,
+#menu_bar021:checked ~ #links021 li,
+#menu_bar022:checked ~ #links022 li,
+#menu_bar023:checked ~ #links023 li,
+#menu_bar024:checked ~ #links024 li,
+#menu_bar025:checked ~ #links025 li,
+#menu_bar026:checked ~ #links026 li,
+#menu_bar027:checked ~ #links027 li,
+#menu_bar028:checked ~ #links028 li,
+#menu_bar029:checked ~ #links029 li {
+  height: 54px;
+  opacity: 1;
+}
