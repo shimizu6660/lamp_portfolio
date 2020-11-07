@@ -11,7 +11,11 @@
                 <?php $character_id = ($value['character_id']); ?>
                 <?php $get_all_wp = get_all_wp($db, $character_id); ?>
                 <? foreach($get_all_wp as $value){ ?>
-                    <li><a href=""><?php print(h($value['wp_name'])); ?></a></li>
+                <form name='nav<?php print(h($value['wp_id'])); ?>' 
+                    method="get" action='wp_list.php' class="wp_nav_form">
+                    <li><a href="javascript:document.nav<?php print(h($value['wp_id'])); ?>.submit()"><?php print(h($value['wp_name'])); ?></a></li>
+                    <input type="hidden" name="wp" value="<?php print(h($value['wp_id'])); ?>">
+                </form>
                 <? } ?>
             </ul>
         <?php } ?>
