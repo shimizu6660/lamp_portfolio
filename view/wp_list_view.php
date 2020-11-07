@@ -17,6 +17,9 @@ header('X-FRAME-OPTIONS: DENY');
 <div class="main_float">
     <article>
         <h2><?php print(h($get_wp_id['wp_name'])); ?></h2>
+        <? if(count($get_wp_movie['movie_id']) === 0){ ?>
+            <h3>まだ登録がありません</h3>
+        <?php } ?>
     </article>
     </div>
 

@@ -15,7 +15,7 @@ function get_all_character($db){
     return fetch_all_query($db,$sql);
 }
 
-//WP情報取得SQL
+//キャラ別WP情報取得SQL
 function get_all_wp($db, $character_id){
     $sql = "
         SELECT
