@@ -16,22 +16,7 @@ header('X-FRAME-OPTIONS: DENY');
 </div>
 <div class="main_float">
     <article>
-        <div class="">
-        <form method="post" action="#" enctype="multipart/form-data">
-            <label>URL <input type="text" name="url" id="url" size="80" placeholder="リストへ追加したいYouTubeのURLを入力"></label>
-            <br>
-            <select name=”index_characters_select”>キャラクター
-                <option value="" selected>キャラクターを選択</option>
-                <option value=”1”>風澄　徹</option>
-                <option value=”2”>片桐　鏡磨</option>
-            </select>
-            <select id="1" class="subbox">
-                <option value="" selected>WPを選択</option>
-                <option value="hn">標準型「レンジャー」</option>
-                <option value="hg">標準型「アサルト」</option>
-            </select>
-        </form>
-        </div>
+        <?php include VIEW_PATH . 'templates/movie_url_form.php'; ?> <!--URLのフォームを読み込み-->
     </article>
     </div>
 
