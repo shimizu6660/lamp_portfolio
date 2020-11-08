@@ -18,5 +18,8 @@ $get_wp_id = get_wp_id($db, $wp_id);
 //dd($get_wp_id);
 //wp別動画一覧取得
 $get_wp_movie = get_wp_movie($db, $wp_id);
+//movieテーブルのレコード取得
+$table_col = table_col($db);
+//dd($table_col);
 
 include_once VIEW_PATH . 'wp_list_view.php';
