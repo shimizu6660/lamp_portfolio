@@ -1,39 +1,27 @@
 <div class="">
-    <form method="post" action="#" enctype="multipart/form-data">
-            <label>URL <input type="text" name="url" id="url" size="80" placeholder="リストへ追加したいYouTubeのURLを入力"></label>
-            <br>
-            
-            <select name="character">
+    <p>はじめに動画内キャラクターを選択してください</p>
+    <form method="post">
+        <select name="character_select">
                 <option value="">キャラクターを選択</option>
                 <?php foreach($get_all_character as $value){ ?>
                 <option value="<?php print(h($value['character_id'])); ?>"><?php print(h($value['character_name'])); ?></option>
                 <?php } ?>
+                <input type="submit" value="キャラクター決定">
+            </select>
+    </form>
+    
+    <?php $character_select = get_post('character_select'); ?><!--上で選んだキャラクターのidを受け取る-->
+    <?php $get_select_wp = get_all_wp($db, $character_select); ?>
+
+    <form action="index_insert.php" method="post" enctype="multipart/form-data">
+            <select name="up_movie">
+                <option value="">WPを選択　　　　　　　　　　　</option>
+                <?php foreach($get_select_wp as $value){ ?>
+                <option value="<?php print(h($value['wp_id'])); ?>"><?php print(h($value['wp_name'])); ?></option>
+                <?php } ?>
             <select>
-            
-        <select name="wp">
-        </select>
-
-        <script>
-        let versionArray = new Array();
-        versionArray[''] = new Array('バージョン情報');
-        versionArray['1'] = new Array('XP', 'Vista', '7', '8', '8.1', '10');
-        versionArray['2'] = new Array('7 (Nougat)', '8 (Oreo)', '9 (Pie)', '10');
-        versionArray['3'] = new Array('10以下', '11', '12', '13');
-
-        document.getElementsByName('character')[0].onchange = function () {
-            let character = this.value;
-            let elm = document.getElementsByName('wp')[0];
-            elm.options.length = 0;
-            for (let i = 0; i < versionArray[character].length; i++) {
-                let op = document.createElement('option');
-                op.value = versionArray[character][i];
-                op.textContent = versionArray[character][i];
-                elm.appendChild(character);
-            }
-        };
-        window.onload = function () {
-            document.getElementsByName('character')[0].onchange();
-        };
-        </script>
+            <br>
+            <label>URL <input type="text" name="url" id="url" size="60" placeholder="リストへ追加したいYouTubeのURLを入力"></label>
+            <button type="submit" name='btn' value="url_btn">登録</button>
     </form>
 </div>
