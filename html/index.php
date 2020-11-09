@@ -9,4 +9,6 @@ require_once MODEL_PATH . 'movie.php';
 
 //$db = get_db_connect();
 
+//$get_all_character = get_all_character($db);
+
 include_once VIEW_PATH . 'index_view.php';

@@ -61,3 +61,16 @@ function insert_movie($db, $movie_name, $movie_url, $movie_id, $character_id, $w
                  ':movie_id'=>$movie_id, ':character_id'=>$character_id, ':wp_id'=>$wp_id);
     return execute_query($db, $sql, $array);
   }
+
+  //moviesのレコード数取得
+  function table_col($db) {
+    $sql = "
+            SELECT 
+                COUNT(*)
+            FROM
+                movies
+            ";
+	
+    $statment = $db->query($sql);
+    return $statment->fetchColumn();
+}
