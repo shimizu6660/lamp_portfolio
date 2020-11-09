@@ -10,11 +10,11 @@ require_once MODEL_PATH . 'movie.php';
 //$db = get_db_connect();
 
 //$get_all_character = get_all_character($db);
+//indexでボタン判別
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_POST['btn']) === TRUE){
         $btn = ($_POST['btn']);
     }
-
     if($btn === 'url_btn'){
         //postで入力されたURLを取得
         $url = get_post('url');
@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
             $movie_id = $my_array_of_vars['v'];
         }else{
-            print "エラー";
+            set_error('URLが正しくありません');
         }
     }
 }
