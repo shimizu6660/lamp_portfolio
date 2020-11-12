@@ -14,7 +14,7 @@
     <?php $get_select_wp = get_all_wp($db, $character_select); ?>
 
     <form action="index_insert.php" method="post" enctype="multipart/form-data">
-            <select name="up_movie">
+            <select name="wp_id_select">
                 <option value="">WPを選択　　　　　　　　　　　</option>
                 <?php foreach($get_select_wp as $value){ ?>
                 <option value="<?php print(h($value['wp_id'])); ?>"><?php print(h($value['wp_name'])); ?></option>

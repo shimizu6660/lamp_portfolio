@@ -16,6 +16,7 @@ header('X-FRAME-OPTIONS: DENY');
 </div>
 <div class="main_float">
     <article>
+        <?php include VIEW_PATH . 'templates/messages.php'; ?>
         <?php include VIEW_PATH . 'templates/movie_url_form.php'; ?> <!--URLのフォームを読み込み-->
     </article>
     </div>
