@@ -44,111 +44,101 @@ function get_all_movie($db){
     return fetch_all_query($db, $wp_id);
 }
 
-  //moviesのレコード数取得
-  function table_col($db) {
+//moviesのレコード数取得
+function table_col($db) {
     $sql = "
-            SELECT 
-                COUNT(*)
-            FROM
-                movies
-            ";
+        SELECT 
+            COUNT(*)
+        FROM
+            movies
+        ";
 	
     $statment = $db->query($sql);
     return $statment->fetchColumn();
 }
 
-function regist_item($db, $name, $price, $stock, $status, $image){
-    $filename = get_upload_filename($image);
-    if(validate_item($name, $price, $stock, $filename, $status) === false){
-      return false;
+//入力されたURLのDB登録
+function regist_movie($db, $movie_url, $movie_id, $wp_id){
+    if(validate_movie($movie_url, $movie_id, $wp_id) === false){
+        set_error('Error：Validation');
+        return false;
     }
-    return regist_item_transaction($db, $name, $price, $stock, $status, $image, $filename);
-  }
-  
-  function regist_item_transaction($db, $name, $price, $stock, $status, $image, $filename){
+    return regist_movie_transaction($db, $movie_url, $movie_id, $wp_id);
+}
+
+//トランザクション処理
+function regist_movie_transaction($db, $movie_url, $movie_id, $wp_id){
     $db->beginTransaction();
-    if(insert_item($db, $name, $price, $stock, $filename, $status) 
-      && save_image($image, $filename)){
+    if(insert_movie($db, $movie_url, $movie_id, $wp_id)){
       $db->commit();
       return true;
     }
     $db->rollback();
+    set_error('Error：Transaction');
     return false;
     
 }
 
-  function insert_movie($db, $movie_name, $movie_url, $movie_id, $character_id, $wp_id){
+//挿入SQL
+function insert_movie($db, $movie_url, $movie_id, $wp_id){
     $sql = "
       INSERT INTO
-        items(
-          movie_name,
+        movies(
           movie_url,
           movie_id,
-          character_id,
           wp_id
         )
-      VALUES(:movie_name, :movie_url, :movie_id, :character_id, :wp_id);
+      VALUES(:movie_url, :movie_id, :wp_id);
     ";
-    
-    $array=array(':movie_name'=>$movie_name, ':movie_url'=>$movie_url,
-                 ':movie_id'=>$movie_id, ':character_id'=>$character_id, ':wp_id'=>$wp_id);
+    $array=array(':movie_url'=>$movie_url, ':movie_id'=>$movie_id, ':wp_id'=>$wp_id);
     return execute_query($db, $sql, $array);
-  }
+}
 
-  function validate_item($name, $price, $stock, $filename, $status){
-    $is_valid_item_name = is_valid_item_name($name);
-    $is_valid_item_price = is_valid_item_price($price);
-    $is_valid_item_stock = is_valid_item_stock($stock);
-    $is_valid_item_filename = is_valid_item_filename($filename);
-    $is_valid_item_status = is_valid_item_status($status);
-  
-    return $is_valid_item_name
-      && $is_valid_item_price
-      && $is_valid_item_stock
-      && $is_valid_item_filename
-      && $is_valid_item_status;
-  }
-  
-  function is_valid_item_name($name){
+//バリデーション
+function validate_movie($movie_url, $movie_id, $wp_id){
+    $is_valid_movie_url = is_valid_movie_url($movie_url);
+    $is_valid_movie_id = is_valid_movie_id($movie_id);
+    $is_valid_movie_wp_id = is_valid_movie_wp_id($wp_id);
+
+    return  $is_valid_movie_url
+      && $is_valid_movie_id
+      && $is_valid_movie_wp_id;
+}
+
+//YoutubeのURLかどうか判別
+function is_valid_movie_url($movie_url){
     $is_valid = true;
-    if(is_valid_length($name, ITEM_NAME_LENGTH_MIN, ITEM_NAME_LENGTH_MAX) === false){
-      set_error('商品名は'. ITEM_NAME_LENGTH_MIN . '文字以上、' . ITEM_NAME_LENGTH_MAX . '文字以内にしてください。');
+    $pattren = '/www.youtube.com/';
+    if(preg_match($pattren, $movie_url) === 0){
+        set_error('YouTubeの動画のURLを入力してください。');
+        $is_valid = false;
+    }
+    return $is_valid;
+}
+
+//youtubeのURLであれば変数に代入。それ以外はエラー。
+//function is_valid_movie_url_id($movie_url){
+//    parse_str( parse_url( $movie_url, PHP_URL_QUERY ), $my_array_of_vars );
+//    $movie_id = $my_array_of_vars['v'];
+//    return $movie_id;
+//}
+
+//URLに動画IDが入力されているか確認
+function is_valid_movie_id($movie_id){
+    $is_valid = true;
+    if($movie_id === ''){
+      set_error('URLにIDが含まれていません。');
       $is_valid = false;
     }
     return $is_valid;
-  }
-  
-  function is_valid_item_price($price){
+}
+
+//wpが選択されているか確認
+function is_valid_movie_wp_id($wp_id){
     $is_valid = true;
-    if(is_positive_integer($price) === false){
-      set_error('価格は0以上の整数で入力してください。');
-      $is_valid = false;
+    if($wp_id === ''){
+        set_error('WPが選択されていません。');
+        $is_valid = false;
     }
     return $is_valid;
-  }
-  
-  function is_valid_item_stock($stock){
-    $is_valid = true;
-    if(is_positive_integer($stock) === false){
-      set_error('在庫数は0以上の整数で入力してください。');
-      $is_valid = false;
-    }
-    return $is_valid;
-  }
-  
-  function is_valid_item_filename($filename){
-    $is_valid = true;
-    if($filename === ''){
-      $is_valid = false;
-    }
-    return $is_valid;
-  }
-  
-  function is_valid_item_status($status){
-    $is_valid = true;
-    if(isset(PERMITTED_ITEM_STATUSES[$status]) === false){
-      $is_valid = false;
-    }
-    return $is_valid;
-  }
-  
+}
