@@ -16,11 +16,15 @@ header('X-FRAME-OPTIONS: DENY');
 </div>
 <div class="main_float">
     <article>
-    <?php include VIEW_PATH . 'templates/movie_url_form.php'; ?> <!--URLのフォームを読み込み-->
-        <p class="wp_title"><?php print(h($get_wp_id['wp_name'])); ?></p>
-        <?php if(($table_col) === 0){ ?>
-            <p>まだ登録がありません</p>
-        <?php } ?>
+        <?php include VIEW_PATH . 'templates/movie_url_form.php'; ?> <!--URLのフォームを読み込み-->
+            <p class="wp_title"><?php print(h($get_wp_id['wp_name'])); ?></p>
+            <?php if(($table_col) === 0){ ?>
+                <p>まだ登録がありません</p>
+            <?php } ?>
+
+        
+            
+        <?php include VIEW_PATH . 'templates/pagination.php'; ?> <!--ページネーションを読み込み-->
     </article>
     </div>
 
