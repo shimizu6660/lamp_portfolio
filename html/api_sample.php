@@ -39,7 +39,7 @@ function get_video($url, $query = array() , $api_ref){
  //アップ日時
  $t = new DateTime($response->items[0]->snippet->publishedAt);
  $t -> setTimeZone(new DateTimeZone('Asia/Tokyo'));
- $upload_date = $t -> format('Y年m月d日 H:i');
+ $uploaded_date = $t -> format('Y年m月d日 H:i');
  //var_dump($img);
 ?>
 
@@ -53,6 +53,6 @@ function get_video($url, $query = array() , $api_ref){
 <br>
 <?php print($title); ?>
 <br>
-<?php print("投稿日：".$upload_date); ?>
+<?php print("投稿日：".$uploaded_date); ?>
 </body>
 </html>

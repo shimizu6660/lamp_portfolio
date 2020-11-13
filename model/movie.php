@@ -8,10 +8,8 @@ function get_wp_movie($db, $wp_id){
     $sql = "
         SELECT
             movie_num,
-            movie_name,
             movie_url,
             movie_id,
-            character_id,
             wp_id,
             createdate
         FROM
@@ -141,4 +139,66 @@ function is_valid_movie_wp_id($wp_id){
         $is_valid = false;
     }
     return $is_valid;
+}
+
+//ページ数の取得
+function get_page($page){
+    if(isset($_GET[$page])){
+      //GETやPOSTは文字列として送られてくるため、数字に変換
+      $page = (int)$_GET[$page];
+      return $page;
+    }else{
+      $page = 1;
+      return $page;
+    }
+}
+
+
+//ページネーション用全商品件数取得
+function get_page_all_movie($db, $wp_id){
+    $sql = "
+      SELECT COUNT(*)
+        movie_num
+      FROM
+        movies
+      WHERE
+        wp_id = :wp_id
+    ";
+    $array=array('wp_id'=>$wp_id);
+    return fetch_query($db, $sql, $array);
+}
+  
+// スタートのポジションを計算する
+function start_page_number($page){
+    if ($page > 1) {
+      //nページ目の場合は、『(n × 10) - 10 = y』
+      $start = ($page * 10) - 10;
+      return $start;
+    } else {
+      $start = 0;
+      return $start;
+    }
+}
+  
+//ページネーション用10件ずつ取得
+function get_page_movies($db, $wp_id, $start){
+    $sql = "
+      SELECT
+        movie_num,
+        movie_url,
+        movieid,
+        wp_id,
+        createdate,
+        uploadedte
+      FROM
+        wp_id = :wp_id
+      WHERE
+        status = 1
+      ORDER BY
+        created DESC
+      LIMIT
+        :start, 10
+    ";
+    $array=array('wp_id'=>$wp_id,':start'=>$start);
+    return fetch_all_query($db, $sql,$array);
 }

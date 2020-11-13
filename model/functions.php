@@ -161,15 +161,3 @@ function is_valid_csrf_token($token){
   // get_session()はユーザー定義関数
   return $token === get_session('csrf_token');
 }
-
-//ページ数の取得
-function get_page($page){
-  if(isset($_GET[$page])){
-    //GETやPOSTは文字列として送られてくるため、数字に変換
-    $page = (int)$_GET[$page];
-    return $page;
-  }else{
-    $page = 1;
-    return $page;
-  }
-}
