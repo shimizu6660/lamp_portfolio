@@ -1,16 +1,16 @@
 <div class="">
     <p>はじめに動画内キャラクターを選択してください</p>
-    <form method="post">
-        <select name="character_select">
+    <form method="get">
+        <select name="character_select" onchange="submit(this.form)">
                 <option value="">キャラクターを選択</option>
                 <?php foreach($get_all_character as $value){ ?>
                 <option value="<?php print(h($value['character_id'])); ?>"><?php print(h($value['character_name'])); ?></option>
                 <?php } ?>
-                <input type="submit" value="キャラクター決定">
+                <!--<input type="submit" value="キャラクター決定">-->
             </select>
     </form>
     
-    <?php $character_select = get_post('character_select'); ?><!--上で選んだキャラクターのidを受け取る-->
+    <?php $character_select = get_get('character_select'); ?><!--上で選んだキャラクターのidを受け取る-->
     <?php $get_select_wp = get_all_wp($db, $character_select); ?>
 
     <form action="index_insert.php" method="post" enctype="multipart/form-data">
