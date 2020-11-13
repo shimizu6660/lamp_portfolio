@@ -57,7 +57,7 @@ function table_col($db) {
 
 //入力されたURLのDB登録
 function regist_movie($db, $movie_url, $movie_id, $wp_id){
-    if(validate_movie($movie_url, $movie_id, $wp_id) === false){
+    if(validate_movie($db, $movie_url, $movie_id, $wp_id) === false){
         set_error('Error：Validation');
         return false;
     }
@@ -92,15 +92,32 @@ function insert_movie($db, $movie_url, $movie_id, $wp_id){
     return execute_query($db, $sql, $array);
 }
 
+//URL重複チェック用SQL
+function check_movie_url($db, $movie_url){
+    $sql = "
+        SELECT 
+            COUNT(movie_url)
+        FROM
+            movies
+        WHERE
+            movie_url = :movie_url
+    ";
+    $array = array(':movie_url'=>$movie_url);
+    return fetch_Column($db, $sql, $array);
+    //return fetch_all_query($db, $sql, $array);
+}
+
 //バリデーション
-function validate_movie($movie_url, $movie_id, $wp_id){
+function validate_movie($db, $movie_url, $movie_id, $wp_id){
     $is_valid_movie_url = is_valid_movie_url($movie_url);
     $is_valid_movie_id = is_valid_movie_id($movie_id);
     $is_valid_movie_wp_id = is_valid_movie_wp_id($wp_id);
+    $is_valid_movie_check_url = is_valid_movie_check_url($db, $movie_url);
 
     return  $is_valid_movie_url
       && $is_valid_movie_id
-      && $is_valid_movie_wp_id;
+      && $is_valid_movie_wp_id
+      && $is_valid_movie_check_url;
 }
 
 //YoutubeのURLかどうか判別
@@ -109,6 +126,16 @@ function is_valid_movie_url($movie_url){
     $pattren = '/www.youtube.com/';
     if(preg_match($pattren, $movie_url) === 0){
         set_error('YouTubeの動画のURLを入力してください。');
+        $is_valid = false;
+    }
+    return $is_valid;
+}
+
+function is_valid_movie_check_url($db, $movie_url){
+    $is_valid = true;
+    $check_movie_url = check_movie_url($db, $movie_url);
+    if($check_movie_url !== 0){
+        set_error('URLがすでに登録されています。');
         $is_valid = false;
     }
     return $is_valid;
