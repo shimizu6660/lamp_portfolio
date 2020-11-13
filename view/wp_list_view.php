@@ -23,7 +23,7 @@ header('X-FRAME-OPTIONS: DENY');
             <?php } ?>
 
         
-
+            
         <?php include VIEW_PATH . 'templates/pagination.php'; ?> <!--ページネーションを読み込み-->
     </article>
     </div>
