@@ -181,7 +181,7 @@ function start_page_number($page){
 }
   
 //ページネーション用10件ずつ取得
-function get_page_movies($db, $wp_id, $start){
+function get_page_movie($db, $wp_id, $start){
     $sql = "
       SELECT
         movie_num,

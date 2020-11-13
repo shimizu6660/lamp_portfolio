@@ -39,4 +39,8 @@ $page_all = ceil($get_page_all_movie['movie_num'] / 10);
 //$_GET[]で取得
 $page = get_page('page');
 
+//該当ページの動画情報を取得する
+$page_num = start_page_number($page);
+$get_page_movie = get_page_movie($db, $wp_id, $start);
+
 include_once VIEW_PATH . 'wp_list_view.php';
