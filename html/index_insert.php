@@ -19,6 +19,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         //postで入力されたURLを取得
         $movie_url = get_post('url');
         $wp_id = get_post('wp_id_select');
+        
+        //urlの重複判定
+        //$check_movie_url = check_movie_url($db, $movie_url);
+        //dd($check_movie_url);
+
         //Youtubeの動画かどうか判別
         //$pattren = '/www.youtube.com/';
         //$match_num = preg_match($pattren, $url);
