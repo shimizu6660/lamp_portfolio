@@ -12,14 +12,15 @@ require_once MODEL_PATH . 'movie.php';
 $wp_id = get_get('wp');
 //DB接続
 $db = get_db_connect();
-//dd($get_wp);
+//dd($wp_id);
 //wpIDからWP名取得
 $get_wp_id = get_wp_id($db, $wp_id);
 //dd($get_wp_id);
 //wp別動画一覧取得
 $get_wp_movie = get_wp_movie($db, $wp_id);
+//dd($get_wp_movie);
 //movieテーブルのレコード取得
-$table_col = table_col($db);
+$table_col = table_col($db,$wp_id);
 //dd($table_col);
 
 //ページネーション用変数初期化
@@ -38,9 +39,12 @@ $page_all = ceil($get_page_all_movie['movie_num'] / 10);
 //現在のページ数の取得
 //$_GET[]で取得
 $page = get_page('page');
+//dd($page);
 
 //該当ページの動画情報を取得する
 $page_num = start_page_number($page);
 $get_page_movie = get_page_movie($db, $wp_id, $start);
+//dd($page_num);
+//dd($get_page_movie);
 
 include_once VIEW_PATH . 'wp_list_view.php';

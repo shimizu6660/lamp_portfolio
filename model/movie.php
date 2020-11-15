@@ -17,10 +17,10 @@ function get_wp_movie($db, $wp_id){
         WHERE
             wp_id = :wp_id
         ORDER BY
-            created DESC
+            createdate DESC
     ";
     $array = array(':wp_id'=>$wp_id);
-    return fetch_all_query($db, $wp_id, $array);
+    return fetch_all_query($db, $sql, $array);
 }
 
 //管理用 全動画情報取得SQL(登録日付降順)
@@ -39,26 +39,27 @@ function get_all_movie($db){
         ORDER BY
             created DESC
     ";
-    return fetch_all_query($db, $wp_id);
+    return fetch_all_query($db, $aql);
 }
 
 //moviesのレコード数取得
-function table_col($db) {
+function table_col($db, $wp_id) {
     $sql = "
         SELECT 
-            COUNT(*)
+          COUNT(*)
         FROM
-            movies
+          movies
+        WHERE
+          wp_id = :wp_id
         ";
-	
-    $statment = $db->query($sql);
-    return $statment->fetchColumn();
+  $array = array(':wp_id'=>$wp_id);
+  return fetch_Column($db, $sql, $array);
 }
 
 //入力されたURLのDB登録
 function regist_movie($db, $movie_url, $movie_id, $wp_id){
     if(validate_movie($db, $movie_url, $movie_id, $wp_id) === false){
-        set_error('Error：Validation');
+        //set_error('Error：Validation');
         return false;
     }
     return regist_movie_transaction($db, $movie_url, $movie_id, $wp_id);
@@ -72,7 +73,7 @@ function regist_movie_transaction($db, $movie_url, $movie_id, $wp_id){
       return true;
     }
     $db->rollback();
-    set_error('Error：Transaction');
+    //set_error('Error：Transaction');
     return false;
     
 }
@@ -227,5 +228,5 @@ function get_page_movie($db, $wp_id, $start){
         :start, 10
     ";
     $array=array('wp_id'=>$wp_id,':start'=>$start);
-    return fetch_all_query($db, $sql,$array);
+    return fetch_all_query($db, $sql, $array);
 }
