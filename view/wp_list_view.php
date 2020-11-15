@@ -20,6 +20,8 @@ header('X-FRAME-OPTIONS: DENY');
             <p class="wp_title"><?php print(h($get_wp_id['wp_name'])); ?></p>
             <?php if(($table_col) === 0){ ?>
                 <p>まだ登録がありません</p>
+            <?php } else { ?>
+                <?php include VIEW_PATH . 'templates/wp_list_api_movie.php'; ?>
             <?php } ?>
 
         

@@ -1,4 +1,5 @@
 <head>
+    <link rel="icon" href="<?php print(VIEW_PATH . 'templates/image/favicon.png'); ?>">
     <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'header.css'); ?>">
 </head>
 <header>

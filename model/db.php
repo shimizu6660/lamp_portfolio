@@ -48,6 +48,7 @@ function execute_query($db, $sql, $params = array()){
   return false;
 }
 
+//DBから数値を返す系
 function fetch_Column($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);

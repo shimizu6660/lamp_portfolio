@@ -1,3 +1,6 @@
+a:hover{
+    text-decoration: none;
+}
 body{
     width: auto;
 }
@@ -11,4 +14,5 @@ nav{
 }
 article{
     margin-top:10px;
+    width: auto;
 }
