@@ -1,9 +1,8 @@
 <?
 require_once MODEL_PATH . 'api_movie.php';
-foreach($get_wp_movie as $value){
     $api_key = "AIzaSyCUcYgwKFn5xRg77sHjsOmid-QvCbvpyks";
     //$api_ref = 設定したリファラ;
-    $youtube_id = $value['movie_id'];
+    $youtube_id = $movie_id;
 
     $response = get_youtube_movie('https://www.googleapis.com/youtube/v3/videos', array(
         'key' => $api_key,
@@ -28,18 +27,9 @@ foreach($get_wp_movie as $value){
     ?>
 
     <div class=>
-        <form name='detail_<?php print(h($value['movie_id'])); ?>' method="get" action="movie_detail.php" class="movie_datail_form">
-            <a href="javascript:document.detail_<?php print(h($value['movie_id'])); ?>.submit()">
-                <img src="<?php print($img); ?>">
-                <br>
-                <?php print($title); ?>
+                <h3><?php print($title); ?></h3>
                 <br>
                 <?php print("投稿者：".$channelTitle." さん"); ?>
                 <br>
                 <?php print("投稿日：".$uploaded_date); ?>
-                <input type="hidden" name="movie_id" value="<?php print(h($value['movie_id'])); ?>">
-            </a>
-        </form>
     </div>
-    
-<? } ?>
