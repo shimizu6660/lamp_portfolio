@@ -6,6 +6,7 @@ header('X-FRAME-OPTIONS: DENY');
 <head>
     <?php include VIEW_PATH . 'templates/head.php'; ?>
     <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'main.css'); ?>">
+    <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'wp_list.css'); ?>">
     <title>Gunslinger Strats プレイ動画集</title>
 </head>
 <body>
@@ -21,7 +22,7 @@ header('X-FRAME-OPTIONS: DENY');
             <?php if(($table_col) === 0){ ?>
                 <p>まだ登録がありません</p>
             <?php } else { ?>
-                <?php include VIEW_PATH . 'templates/wp_list_api_movie.php'; ?>
+                <?php include VIEW_PATH . 'templates/wp_list_api_movie.php'; ?> <!--動画詳細読み込み-->
             <?php } ?>
 
         

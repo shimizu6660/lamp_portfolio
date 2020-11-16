@@ -1,0 +1,17 @@
+.movie_link {
+    /*float: left;
+    width: 25%;*/
+    display: flex;
+    margin-bottom: 10px;
+}
+.box{
+    float: left;
+    border: solid 1px white;
+}
+.detail{
+    width: 500px;
+    height: 180px;
+}
+.movie_link a{
+    color: black;
+}
