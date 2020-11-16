@@ -6,6 +6,7 @@ header('X-FRAME-OPTIONS: DENY');
 <head>
     <?php include VIEW_PATH . 'templates/head.php'; ?>
     <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'main.css'); ?>">
+    <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'movie_detail.css'); ?>">
     <title>Gunslinger Strats プレイ動画集</title>
 </head>
 <body>
@@ -16,7 +17,7 @@ header('X-FRAME-OPTIONS: DENY');
 </div>
 <div class="main_float">
     <article>
-        <div class="movie_detail">
+        <div class="movie_wrap">
             <iframe width="854" height="450" 
                 src="https://www.youtube.com/embed/<?php print(h($movie_id)); ?>" 
                 frameborder="0" 

@@ -43,7 +43,7 @@ $page = get_page('page');
 
 //該当ページの動画情報を取得する
 $page_num = start_page_number($page);
-$get_page_movie = get_page_movie($db, $wp_id, $start);
+$get_page_movie = get_page_movie($db, $wp_id, $page_num);
 //dd($page_num);
 //dd($get_page_movie);
 

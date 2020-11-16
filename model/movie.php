@@ -57,18 +57,18 @@ function table_col($db, $wp_id) {
 }
 
 //入力されたURLのDB登録
-function regist_movie($db, $movie_url, $movie_id, $wp_id){
-    if(validate_movie($db, $movie_url, $movie_id, $wp_id) === false){
+function regist_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date){
+    if(validate_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date) === false){
         //set_error('Error：Validation');
         return false;
     }
-    return regist_movie_transaction($db, $movie_url, $movie_id, $wp_id);
+    return regist_movie_transaction($db, $movie_url, $movie_id, $wp_id, $uploaded_date);
 }
 
 //トランザクション処理
-function regist_movie_transaction($db, $movie_url, $movie_id, $wp_id){
+function regist_movie_transaction($db, $movie_url, $movie_id, $wp_id, $uploaded_date){
     $db->beginTransaction();
-    if(insert_movie($db, $movie_url, $movie_id, $wp_id)){
+    if(insert_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date)){
       $db->commit();
       return true;
     }
@@ -79,17 +79,18 @@ function regist_movie_transaction($db, $movie_url, $movie_id, $wp_id){
 }
 
 //挿入SQL
-function insert_movie($db, $movie_url, $movie_id, $wp_id){
+function insert_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date){
     $sql = "
       INSERT INTO
         movies(
           movie_url,
           movie_id,
-          wp_id
+          wp_id,
+          uploaded_date
         )
-      VALUES(:movie_url, :movie_id, :wp_id);
+      VALUES(:movie_url, :movie_id, :wp_id, :uploaded_date);
     ";
-    $array=array(':movie_url'=>$movie_url, ':movie_id'=>$movie_id, ':wp_id'=>$wp_id);
+    $array=array(':movie_url'=>$movie_url, ':movie_id'=>$movie_id, ':wp_id'=>$wp_id, ':uploaded_date'=>$uploaded_date);
     return execute_query($db, $sql, $array);
 }
 
@@ -109,7 +110,7 @@ function check_movie_url($db, $movie_url){
 }
 
 //バリデーション
-function validate_movie($db, $movie_url, $movie_id, $wp_id){
+function validate_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date){
     $is_valid_movie_url = is_valid_movie_url($movie_url);
     $is_valid_movie_id = is_valid_movie_id($movie_id);
     $is_valid_movie_wp_id = is_valid_movie_wp_id($wp_id);
@@ -214,16 +215,16 @@ function get_page_movie($db, $wp_id, $start){
       SELECT
         movie_num,
         movie_url,
-        movieid,
+        movie_id,
         wp_id,
         createdate,
-        uploadedte
+        uploaded_date
       FROM
-        wp_id = :wp_id
+        movies
       WHERE
-        status = 1
+        wp_id = :wp_id
       ORDER BY
-        created DESC
+        uploaded_date DESC
       LIMIT
         :start, 10
     ";
