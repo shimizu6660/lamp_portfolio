@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $movie_id = $my_array_of_vars['v'];
 
         //APIでアップロード時間を取得し、挿入
-            $api_key = "AIzaSyCUcYgwKFn5xRg77sHjsOmid-QvCbvpyks";
+            $api_key = "AIzaSyCFr83Lpc0438i2bXKoGfkPPV9FCoCzZhA";
             //$api_ref = 設定したリファラ;
             $youtube_id = $movie_id;
 
@@ -37,24 +37,37 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 'part' => 'snippet', // 取得するデータの種類 (タイトルや画像を含める場合はsnippet)
                 'type' => 'video', // 結果の種類 (channel,playlist,video)
             ), $api_ref);
+            //サムネイルのURLを出力する
+            //$img = $response->items[0]->snippet->thumbnails->medium->url; //default < medium < high
+            //タイトルの出力
+            $title = $response->items[0]->snippet->title;
+            //チャンネルタイトルの出力
+            $channelTitle = $response->items[0]->snippet->channelTitle;
+            //再生回数
+            //$viewCount = $response->items[0]->snippet->viewCount;
             //アップ日時
             $t = new DateTime($response->items[0]->snippet->publishedAt);
             $t -> setTimeZone(new DateTimeZone('Asia/Tokyo'));
-            $uploaded_date = $t ->format('Y-m-d');
+            $uploaded_date = $t ->format('Y-m-d H:i:s');
         //dd($uploaded_date);
 
         //print($movie_url);
         //print($movie_id);
         //print($wp_id);
         //dd($wp_id);
-        if(regist_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date)){
+        if(regist_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date)){
             set_message('動画URLを登録しました。');
         }else {
             set_error('動画URLの登録に失敗しました。');
         }
     }
 }
-//dd($movie_url)
+//トップ新着アップロード動画リスト取得
+$get_newup_movie = get_newup_movie($db);
+//トップ新着リスト登録動画リスト
+$get_newregist_movie = get_newregist_movie($db);
+//$get_all_character = get_all_character($db);
+//dd($movie_url);
 //dd($movie_id);
 
 include_once VIEW_PATH . 'index_view.php';

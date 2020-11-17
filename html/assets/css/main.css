@@ -19,3 +19,14 @@ article{
     margin: 10px 0 auto;
     margin-left: 10px;
 }
+.form_box{
+    background-color: #EEEEEE;
+    padding: 5px;
+}
+.wp_title {
+    border-bottom: solid 1px #DDDDDD;
+}
+.list_title{
+    border-bottom: solid 1px #DDDDDD;
+    margin-top: 30px;
+}

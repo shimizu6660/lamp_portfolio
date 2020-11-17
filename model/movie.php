@@ -11,13 +11,16 @@ function get_wp_movie($db, $wp_id){
             movie_url,
             movie_id,
             wp_id,
-            createdate
+            title,
+            channelTitle,
+            createdate,
+            uploaded_date
         FROM
             movies
         WHERE
             wp_id = :wp_id
         ORDER BY
-            createdate DESC
+            uploaded_date DESC
     ";
     $array = array(':wp_id'=>$wp_id);
     return fetch_all_query($db, $sql, $array);
@@ -33,11 +36,14 @@ function get_all_movie($db){
             movie_id,
             character_id,
             wp_id,
-            createdate
+            title,
+            channelTitle,
+            createdate,
+            uploaded_date
         FROM
             movies
         ORDER BY
-            created DESC
+            uploaded_date DESC
     ";
     return fetch_all_query($db, $aql);
 }
@@ -57,18 +63,18 @@ function table_col($db, $wp_id) {
 }
 
 //入力されたURLのDB登録
-function regist_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date){
-    if(validate_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date) === false){
+function regist_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date){
+    if(validate_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date) === false){
         //set_error('Error：Validation');
         return false;
     }
-    return regist_movie_transaction($db, $movie_url, $movie_id, $wp_id, $uploaded_date);
+    return regist_movie_transaction($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date);
 }
 
 //トランザクション処理
-function regist_movie_transaction($db, $movie_url, $movie_id, $wp_id, $uploaded_date){
+function regist_movie_transaction($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date){
     $db->beginTransaction();
-    if(insert_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date)){
+    if(insert_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date)){
       $db->commit();
       return true;
     }
@@ -79,18 +85,20 @@ function regist_movie_transaction($db, $movie_url, $movie_id, $wp_id, $uploaded_
 }
 
 //挿入SQL
-function insert_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date){
+function insert_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date){
     $sql = "
       INSERT INTO
         movies(
           movie_url,
           movie_id,
           wp_id,
+          title,
+          channelTitle,
           uploaded_date
         )
-      VALUES(:movie_url, :movie_id, :wp_id, :uploaded_date);
+      VALUES(:movie_url, :movie_id, :wp_id, :title, :channelTitle, :uploaded_date);
     ";
-    $array=array(':movie_url'=>$movie_url, ':movie_id'=>$movie_id, ':wp_id'=>$wp_id, ':uploaded_date'=>$uploaded_date);
+    $array=array(':movie_url'=>$movie_url, ':movie_id'=>$movie_id, ':wp_id'=>$wp_id, ':title'=>$title, ':channelTitle'=>$channelTitle, ':uploaded_date'=>$uploaded_date);
     return execute_query($db, $sql, $array);
 }
 
@@ -110,7 +118,7 @@ function check_movie_url($db, $movie_url){
 }
 
 //バリデーション
-function validate_movie($db, $movie_url, $movie_id, $wp_id, $uploaded_date){
+function validate_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date){
     $is_valid_movie_url = is_valid_movie_url($movie_url);
     $is_valid_movie_id = is_valid_movie_id($movie_id);
     $is_valid_movie_wp_id = is_valid_movie_wp_id($wp_id);
@@ -217,6 +225,8 @@ function get_page_movie($db, $wp_id, $start){
         movie_url,
         movie_id,
         wp_id,
+        title,
+        channelTitle,
         createdate,
         uploaded_date
       FROM
@@ -230,4 +240,99 @@ function get_page_movie($db, $wp_id, $start){
     ";
     $array=array('wp_id'=>$wp_id,':start'=>$start);
     return fetch_all_query($db, $sql, $array);
+}
+
+//トップページ用 新規アップロード動画取得
+function get_newup_movie($db){
+  $sql = "
+    SELECT
+      movie_num,
+      movie_url,
+      movie_id,
+      wp_id,
+      title,
+      channelTitle,
+      createdate,
+      uploaded_date
+    FROM
+      movies
+    ORDER BY
+      uploaded_date DESC
+    LIMIT
+      0, 5
+  ";
+  return fetch_all_query($db, $sql);
+}
+
+//トップページ用 新規リスト登録動画取得
+function get_newregist_movie($db){
+  $sql = "
+    SELECT
+      movie_num,
+      movie_url,
+      movie_id,
+      wp_id,
+      title,
+      channelTitle,
+      createdate,
+      uploaded_date
+    FROM
+      movies
+    ORDER BY
+      createdate DESC
+    LIMIT
+      0, 5
+  ";
+  return fetch_all_query($db, $sql);
+}
+
+//個別動画の情報取得
+function get_detail_movie($db, $movie_id){
+  $sql = "
+      SELECT
+          movie_num,
+          movie_url,
+          movie_id,
+          wp_id,
+          title,
+          channelTitle,
+          createdate,
+          uploaded_date
+      FROM
+          movies
+      WHERE
+          movie_id = :movie_id
+      ORDER BY
+          uploaded_date DESC
+  ";
+  $array = array(':movie_id'=>$movie_id);
+  return fetch_query($db, $sql, $array);
+}
+
+//削除用
+function destroy_movie($db, $movie_id){
+  $movie = get_detail_movie($db, $movie_id);
+  if($movie === false){
+    return false;
+  }
+  $db->beginTransaction();
+  if(delete_movie($db, $movie['movie_id'])){
+    $db->commit();
+    return true;
+  }
+  $db->rollback();
+  return false;
+}
+//削除用SQL
+function delete_movie($db, $movie_id){
+  $sql = "
+    DELETE FROM
+      movies
+    WHERE
+      movie_id = :movie_id
+    LIMIT 1
+  ";
+
+  $array=array(':movie_id'=>$movie_id);
+  return execute_query($db, $sql, $array);
 }

@@ -19,15 +19,20 @@ header('X-FRAME-OPTIONS: DENY');
     <article>
         <div class="movie_wrap">
             <iframe width="854" height="450" 
-                src="https://www.youtube.com/embed/<?php print(h($movie_id)); ?>" 
+                src="https://www.youtube.com/embed/<?php print(h($movie_id)); ?>?autoplay=1" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen>
                 </iframe>
         </div>
-        <?php include VIEW_PATH . 'templates/detail_api_movie.php'; ?> <!--動画詳細読み込み-->
-            
-        <?php include VIEW_PATH . 'templates/pagination.php'; ?> <!--ページネーションを読み込み-->
+
+        <div class=>
+                <h3><?php print(h($get_detail_movie['title'])); ?></h3>
+                <br>
+                <?php print("投稿者：".$get_detail_movie['channelTitle']." さん"); ?>
+                <br>
+                <?php print("投稿日：".$get_detail_movie['uploaded_date']); ?>
+        </div>
     </article>
     </div>
 

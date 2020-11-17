@@ -11,8 +11,10 @@ require_once MODEL_PATH . 'movie.php';
 //navからWPのIDをgetで取得
 $movie_id = get_get('movie_id');
 //DB接続
-//$db = get_db_connect();
+$db = get_db_connect();
 //dd($movie_id);
+$get_detail_movie = get_detail_movie($db, $movie_id);
+//dd($get_detail_movie['movie_id']);
 
 
 include_once VIEW_PATH . 'movie_detail_view.php';

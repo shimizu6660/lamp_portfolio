@@ -22,15 +22,13 @@ header('X-FRAME-OPTIONS: DENY');
             <?php if(($table_col) === 0){ ?>
                 <p>まだ登録がありません</p>
             <?php } else { ?>
-                <?php include VIEW_PATH . 'templates/wp_list_api_movie.php'; ?> <!--動画詳細読み込み-->
+                <?php include VIEW_PATH . 'templates/wp_list_movie.php'; ?> <!--動画詳細読み込み-->
             <?php } ?>
-
-        
             
-        <?php include VIEW_PATH . 'templates/pagination.php'; ?> <!--ページネーションを読み込み-->
     </article>
+    <?php include VIEW_PATH . 'templates/pagination.php'; ?> <!--ページネーションを読み込み-->
     </div>
-
+    
 </main>
 </body>
 </html>
