@@ -1,4 +1,4 @@
-<nav aria-label="Page navigation">
+<div aria-label="Page navigation">
     <ul class="pagination pagination justify-content-center">
         <?php if($page>1){ ?>
             <li class="page-item"><a class="page-link" href="?page=<?php echo ($page-1) ?>"><?php echo '<'; ?></a></li>
@@ -12,4 +12,4 @@
                 <li class="page-item"><a class="page-link" href="?page=<?php echo ($page+1) ?>"><?php echo '>'; ?></a></li>
             <?php } ?>
     </ul>
-</nav>
+</div>

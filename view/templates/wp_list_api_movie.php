@@ -28,10 +28,10 @@ foreach($get_page_movie as $value){
     ?>
 
     <div class="movie_link">
-        <form name='detail_<?php print(h($value['movie_id'])); ?>' method="get" action="movie_detail.php" class="movie_datail_form">
-            <a href="javascript:document.detail_<?php print(h($value['movie_id'])); ?>.submit()">
+        <form name='<?php print(h($value['movie_id'])); ?>' method="get" action="movie_detail.php" class="movie_datail_form">
+            <a href="javascript:document.<?php print(h($value['movie_id'])); ?>.submit()">
                 <div class="box">
-                    <img src="<?php print($img); ?>">
+                <img src="https://img.youtube.com/vi/<?php print(h($value['movie_id'])); ?>/mqdefault.jpg" />
                 </div>      
                 <div class="box detail">
                     <?php print($title); ?>

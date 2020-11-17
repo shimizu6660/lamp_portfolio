@@ -21,7 +21,7 @@ function get_video($url, $query = array() , $api_ref){
    return json_decode($res);
  }
 
- $api_key = "AIzaSyCUcYgwKFn5xRg77sHjsOmid-QvCbvpyks";
+ $api_key = "AIzaSyBMx6Zfq5JXGgO4ADZp-5bXwM0c7DnupKY";
  //$api_ref = 設定したリファラ;
  $youtube_id = "3TpZ6pSh2EQ";
 
