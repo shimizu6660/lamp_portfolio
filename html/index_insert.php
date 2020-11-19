@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $movie_id = $my_array_of_vars['v'];
 
         //APIでアップロード時間を取得し、挿入
-            $api_key = "AIzaSyCFr83Lpc0438i2bXKoGfkPPV9FCoCzZhA";
+            $api_key = youtubeAPI;
             //$api_ref = 設定したリファラ;
             $youtube_id = $movie_id;
 

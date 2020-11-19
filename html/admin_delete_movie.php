@@ -13,10 +13,9 @@ if(destroy_movie($db, $movie_id) === true){
 } else {
   set_error('削除に失敗しました。');
 }
-//トップ新着アップロード動画リスト取得
-$get_newup_movie = get_newup_movie($db);
-//トップ新着リスト登録動画リスト
-$get_newregist_movie = get_newregist_movie($db);
 
-include_once VIEW_PATH . 'index_view.php';
+//全動画リスト取得
+$get_all_movie = get_all_movie($db);
+
+include_once VIEW_PATH . 'admin_index_view.php';
 //redirect_to('index.php');

@@ -1,8 +1,8 @@
-<?php foreach($get_page_movie as $value){ ?>
+<?php foreach($get_all_movie as $value){ ?>
     <div class="movie_link">
-        <a href="movie_detail.php?movie_id=<?php print(h($value['movie_id'])); ?>">
+            <a href="movie_detail.php?movie_id=<?php print(h($value['movie_id'])); ?>">
                 <div class="box">
-                <img src="https://img.youtube.com/vi/<?php print(h($value['movie_id'])); ?>/mqdefault.jpg" />
+                    <img src="https://img.youtube.com/vi/<?php print(h($value['movie_id'])); ?>/mqdefault.jpg" />
                 </div>      
                 <div class="box detail">
                     <?php print(h($value['title'])); ?>
@@ -12,10 +12,9 @@
                     <?php print("投稿日：".h($value['uploaded_date'])); ?>
                 </div>
             </a>
-        <!--<form method="post" action="delete_movie.php">
+        <form method="post" action="admin_delete_movie.php">
                 <input type="submit" value="リストから削除" class="btn btn-danger delete">
                 <input type="hidden" name="movie_id" value="<?php print(h($value['movie_id'])); ?>">
-        </form>-->
+        </form>
     </div>
-    
 <?php } ?>
