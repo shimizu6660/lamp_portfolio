@@ -1,4 +1,4 @@
-<?
+<?php
 require_once MODEL_PATH . 'api_movie.php';
 foreach($get_page_movie as $value){
     $api_key = "AIzaSyCUcYgwKFn5xRg77sHjsOmid-QvCbvpyks";
@@ -45,4 +45,4 @@ foreach($get_page_movie as $value){
         </form>
     </div>
     
-<? } ?>
+<?php } ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 require_once MODEL_PATH . 'api_movie.php';
     $api_key = "AIzaSyCUcYgwKFn5xRg77sHjsOmid-QvCbvpyks";
     //$api_ref = 設定したリファラ;

@@ -13,5 +13,5 @@ define('DB_USER', 'testuser');
 define('DB_PASS', 'password');
 define('DB_CHARSET', 'utf8');
 
-define('youtubeAPI', 'AIzaSyCFr83Lpc0438i2bXKoGfkPPV9FCoCzZhA')
+define('youtubeAPI', '')
 ?>

@@ -5,6 +5,8 @@ require_once '../conf/const.php';
 require_once MODEL_PATH . 'functions.php';
 //movieデータに関する関数ファイルを読み込み
 require_once MODEL_PATH . 'movie.php';
+//DBファイルの読み込み
+require_once MODEL_PATH . 'db.php';
 
 
 $db = get_db_connect();

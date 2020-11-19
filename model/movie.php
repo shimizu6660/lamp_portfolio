@@ -31,10 +31,8 @@ function get_all_movie($db){
     $sql = "
         SELECT
             movie_num,
-            movie_name,
             movie_url,
             movie_id,
-            character_id,
             wp_id,
             title,
             channelTitle,
@@ -43,9 +41,9 @@ function get_all_movie($db){
         FROM
             movies
         ORDER BY
-            uploaded_date DESC
+            createdate DESC
     ";
-    return fetch_all_query($db, $aql);
+    return fetch_all_query($db, $sql);
 }
 
 //moviesのレコード数取得
