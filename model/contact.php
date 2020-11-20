@@ -13,9 +13,9 @@ function regist_contact($db, $twitter_id, $contact_name, $contact_content){
 }
 
 //トランザクション処理
-function regist_contact_transaction($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date){
+function regist_contact_transaction($db, $twitter_id, $contact_name, $contact_content){
     $db->beginTransaction();
-    if(insert_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date)){
+    if(insert_contact($db, $twitter_id, $contact_name, $contact_content)){
       $db->commit();
       return true;
     }
@@ -26,94 +26,32 @@ function regist_contact_transaction($db, $movie_url, $movie_id, $wp_id, $title, 
 }
 
 //挿入SQL
-function insert_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date){
+function insert_contact($db, $twitter_id, $contact_name, $contact_content){
     $sql = "
       INSERT INTO
-        movies(
-          movie_url,
-          movie_id,
-          wp_id,
-          title,
-          channelTitle,
-          uploaded_date
+        contacts(
+          twitter_id,
+          contact_name,
+          contact_content
         )
-      VALUES(:movie_url, :movie_id, :wp_id, :title, :channelTitle, :uploaded_date);
+      VALUES(:twitter_id, :contact_name, :contact_content);
     ";
-    $array=array(':movie_url'=>$movie_url, ':movie_id'=>$movie_id, ':wp_id'=>$wp_id, ':title'=>$title, ':channelTitle'=>$channelTitle, ':uploaded_date'=>$uploaded_date);
+    $array=array(':twitter_id'=>$twitter_id, ':contact_name'=>$contact_name, ':contact_content'=>$contact_content);
     return execute_query($db, $sql, $array);
 }
 
-//URL重複チェック用SQL
-function check_movie_url($db, $movie_url){
-    $sql = "
-        SELECT 
-            COUNT(movie_url)
-        FROM
-            movies
-        WHERE
-            movie_url = :movie_url
-    ";
-    $array = array(':movie_url'=>$movie_url);
-    return fetch_Column($db, $sql, $array);
-    //return fetch_all_query($db, $sql, $array);
-}
-
 //バリデーション
-function validate_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitle, $uploaded_date){
-    $is_valid_movie_url = is_valid_movie_url($movie_url);
-    $is_valid_movie_id = is_valid_movie_id($movie_id);
-    $is_valid_movie_wp_id = is_valid_movie_wp_id($wp_id);
-    $is_valid_movie_check_url = is_valid_movie_check_url($db, $movie_url);
+function validate_contact($db, $twitter_id, $contact_name, $contact_content){
+    $is_valid_contact_content = is_valid_contact_content($contact_content);
 
-    return  $is_valid_movie_url
-      && $is_valid_movie_id
-      && $is_valid_movie_wp_id
-      && $is_valid_movie_check_url;
+    return  $is_valid_contact_content;
 }
 
-//YoutubeのURLかどうか判別
-function is_valid_movie_url($movie_url){
+//内容が書かれているか確認
+function is_valid_contact_content($contact_content){
     $is_valid = true;
-    $pattren = '/www.youtube.com/';
-    if(preg_match($pattren, $movie_url) === 0){
-        set_error('YouTubeの動画のURLを入力してください。');
-        $is_valid = false;
-    }
-    return $is_valid;
-}
-
-function is_valid_movie_check_url($db, $movie_url){
-    $is_valid = true;
-    $check_movie_url = check_movie_url($db, $movie_url);
-    if($check_movie_url !== 0){
-        set_error('URLがすでに登録されています。');
-        $is_valid = false;
-    }
-    return $is_valid;
-}
-
-//youtubeのURLであれば変数に代入。それ以外はエラー。
-//function is_valid_movie_url_id($movie_url){
-//    parse_str( parse_url( $movie_url, PHP_URL_QUERY ), $my_array_of_vars );
-//    $movie_id = $my_array_of_vars['v'];
-//    return $movie_id;
-//}
-
-//URLに動画IDが入力されているか確認
-function is_valid_movie_id($movie_id){
-    $is_valid = true;
-    if($movie_id === ''){
-      set_error('URLにIDが含まれていません。');
-      $is_valid = false;
-    }
-    return $is_valid;
-}
-
-//wpが選択されているか確認
-function is_valid_movie_wp_id($wp_id){
-    $is_valid = true;
-    if($wp_id === ''){
-        set_error('WPが選択されていません。');
+    if($contact_content === ''){
+        set_error('お問い合わせ内容を入力してください');
         $is_valid = false;
     }
     return $is_valid;
