@@ -4,6 +4,11 @@ header{
     border-bottom: solid 1px #DDDDDD;
     /*margin-bottom: 10px;*/
 }
-.title_logo{
-    color: black;
+.contact_logo{
+    position: absolute;
+right: 0;
+bottom: 0;
+}
+.contact{
+    position: relative;
 }

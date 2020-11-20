@@ -7,7 +7,7 @@ header('X-FRAME-OPTIONS: DENY');
     <?php include VIEW_PATH . 'templates/head.php'; ?>
     <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'main.css'); ?>">
     <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'wp_list.css'); ?>">
-    <title>Gunslinger Strats プレイ動画集</title>
+    <title>Gunslinger Strats 動画まとめ</title>
 </head>
 <body>
     <?php include VIEW_PATH . 'templates/header.php'; ?>
