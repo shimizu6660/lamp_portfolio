@@ -12,11 +12,11 @@ header('X-FRAME-OPTIONS: DENY');
 </head>
 <body>
     <?php include VIEW_PATH . 'templates/header.php'; ?>
-<main>
-<div class="main_float">
+<main class="row">
+<div class="col-2">
     <?php include HTML_PATH . 'navi.php'; ?>
 </div>
-<div class="main_float">
+<div class="col-9">
     <article>
         <p>不具合や追加機能の要望などの連絡には以下のフォームからお問い合わせいただくか<br>
         TwitterでのDMでのお問い合わせは<a href="https://twitter.com/messages/compose?recipient_id=704761399940022272">こちらまで(@panao666)</a></p>
