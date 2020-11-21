@@ -11,11 +11,11 @@ header('X-FRAME-OPTIONS: DENY');
 </head>
 <body>
     <?php include VIEW_PATH . 'templates/header.php'; ?>
-<main>
-<div class="">
+<main class="row">
+<div class="col-2">
     <?php include HTML_PATH . 'navi.php'; ?>
 </div>
-<div class="main_article">
+<div class="col-9">
     <article>
         <?php include VIEW_PATH . 'templates/messages.php'; ?>
         <?php include VIEW_PATH . 'templates/movie_url_form.php'; ?> <!--URLのフォームを読み込み-->

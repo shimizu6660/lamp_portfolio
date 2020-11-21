@@ -11,14 +11,15 @@ header('X-FRAME-OPTIONS: DENY');
 </head>
 <body>
     <?php include VIEW_PATH . 'templates/header.php'; ?>
-<main>
-<div class="main_float">
+    
+<main class="row">
+<div class="col-2">
     <?php include HTML_PATH . 'navi.php'; ?>
 </div>
-<div class="main_float">
+<div class="col-9">
     <article>
-        <div class="movie_wrap">
-            <iframe width="854" height="450" 
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" width="854" height="450" 
                 src="https://www.youtube.com/embed/<?php print(h($movie_id)); ?>?autoplay=1" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -26,7 +27,7 @@ header('X-FRAME-OPTIONS: DENY');
                 </iframe>
         </div>
 
-        <div class=>
+        <div class="">
                 <h3><?php print(h($get_detail_movie['title'])); ?></h3>
                 <br>
                 <?php print("投稿者：".$get_detail_movie['channelTitle']." さん"); ?>

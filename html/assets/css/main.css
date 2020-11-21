@@ -1,23 +1,17 @@
 a:hover{
     text-decoration: none;
 }
-body{
-    width: auto;
-}
+
 main {
     /*float: left;
     width: 25%;*/
-    display: flex;
-    
+    display: flex;   
 }
-nav{
-    width:265px;
-}
+
 article{
     margin-top:10px;
-    width: 1000px;
     margin: 10px 0 auto;
-    margin-left: 10px;
+    width: auto;
 }
 .form_box{
     background-color: #EEEEEE;
@@ -29,4 +23,10 @@ article{
 .list_title{
     border-bottom: solid 1px #DDDDDD;
     margin-top: 30px;
+}
+
+article img{
+    width:100%;
+    max-width: 100%;
+    height: auto;
 }
