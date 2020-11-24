@@ -18,7 +18,7 @@ http://gunst-movie.com/
 </ul>
 
 # 機能
-<li>
+<ul>
   <li>YouTube動画URLをリストへ登録機能</li>
   <li>動画詳細自動登録機能</li>
   <li>キャラクター・武装リスト表示機能</li>
@@ -27,4 +27,4 @@ http://gunst-movie.com/
     </ul>
   <li>新着アップロード表示機能</li>
   <li>レスポンシブ対応</li>
-</li>
+</ul>
