@@ -6,10 +6,11 @@
 http://gunst-movie.com/
 
 # 使用技術
-<li>
-<ul>PHP
-MySQL
-Bootstrap4
-Docker/Docker-compose
-YouTube Data API v3
+<ul>
+  <li>PHP
+  <li>MySQL
+  <li>Bootstrap4
+  <li>Docker/Docker-compose
+  <li>YouTube Data API v3
+</ul>
 
