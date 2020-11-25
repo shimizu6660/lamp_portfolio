@@ -7,6 +7,8 @@
   
   #nav-drawer {
     position: relative;
+    margin-top: 10px;
+    margin-left: 20px;
   }
   
   /*チェックボックス等は非表示に*/

@@ -12,11 +12,11 @@ header('X-FRAME-OPTIONS: DENY');
 </head>
 <body>
     <?php include VIEW_PATH . 'templates/header.php'; ?>
-<main>
-<div class="main_float">
+<main class="row">
+<div class="col-sm-2">
     <?php include HTML_PATH . 'navi.php'; ?>
 </div>
-<div class="main_float">
+<div class="col-sm-10">
     <article>
         <p>送信内容の確認をしてください</p>
         <?php if($twitter_id !== ''){ ?>

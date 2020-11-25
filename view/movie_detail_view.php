@@ -13,10 +13,10 @@ header('X-FRAME-OPTIONS: DENY');
     <?php include VIEW_PATH . 'templates/header.php'; ?>
     
 <main class="row">
-<div class="col-2">
+<div class="col-sm-2">
     <?php include HTML_PATH . 'navi.php'; ?>
 </div>
-<div class="col-9">
+<div class="col-sm-10">
     <article>
         <div class="embed-responsive embed-responsive-16by9">
             <iframe class="embed-responsive-item" width="854" height="450" 
