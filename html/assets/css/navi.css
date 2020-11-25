@@ -19,7 +19,7 @@ nav{
 .nav_label {
   display: block;
   margin: 0 0 4px 0;
-  padding : 15px;
+  padding : 10px;
   line-height: 1;
   color :#fff;
   background:#888888;
@@ -84,4 +84,11 @@ nav{
 #menu_bar029:checked ~ #links029 li {
   height: 54px;
   opacity: 1;
+}
+
+/*横1000px以下の時はサイドメニューを隠す*/
+@media screen and (max-width: 1000px){
+  .col-sm-2{
+    display: none;
+  }
 }
