@@ -12,10 +12,10 @@ header('X-FRAME-OPTIONS: DENY');
 <body>
     <?php include VIEW_PATH . 'templates/header.php'; ?>
 <main class="row">
-<div class="col-2">
+<div class="col-sm-2">
     <?php include HTML_PATH . 'navi.php'; ?>
 </div>
-<div class="col-9">
+<div class="col-sm-9">
     <article>
         <?php include VIEW_PATH . 'templates/movie_url_form.php'; ?> <!--URLのフォームを読み込み-->
             <p class="wp_title"><?php print(h($get_wp_id['wp_name'])); ?></p>
