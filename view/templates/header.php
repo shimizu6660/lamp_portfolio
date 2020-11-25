@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'header.css'); ?>">
+    <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'header_navi.css'); ?>">
     <link rel="shortcut icon" href="favicon.ico">
 
     <meta name="twitter:card" content="summary_large_image" /> <!--①-->
@@ -21,11 +22,22 @@
 </head>
 <header>
     <div class="header_box">
-    <a href="index.php"><img class='title_logo' src="image/title_logo.png" width="200"></a>
+        <a href="index.php"><img class='title_logo' src="image/title_logo.png" width="200"></a>
+    </div>
     <div class="header_box">
         <div class="contact">
-        <a href="contact.php" class='contact_logo'><img src="image/contact_logo.png" width="50"></a>
+            <a href="contact.php" class='contact_logo'><img src="image/contact_logo.png" width="50"></a>
         </div>
     </div>
-</div>
+
+    <div class="header_navi">
+        <div id="nav-drawer">
+            <input id="nav-input" type="checkbox" class="nav-unshown">
+            <label id="nav-open" for="nav-input"><span></span></label>
+            <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+            <div id="nav-content">
+                <?php include HTML_PATH . 'header_navi.php'; ?>
+            </div>
+        </div>
+    </div>
 </header>
