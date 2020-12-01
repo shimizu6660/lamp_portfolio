@@ -12,7 +12,7 @@ header('X-FRAME-OPTIONS: DENY');
 </head>
 <body>
     <?php include VIEW_PATH . 'templates/header.php'; ?>
-<main class="row">
+<main class="">
 <div class="col-sm-2">
     <?php include HTML_PATH . 'navi.php'; ?>
 </div>
