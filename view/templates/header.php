@@ -26,7 +26,8 @@
     </div>
     <div class="header_box">
         <div class="contact">
-            <a href="contact.php" class='contact_logo'><img src="image/contact_logo.png" width="50"></a>
+            <a href="how_to_use.php" class='sub_logo'><img src="image/how_to_use_logo.png" width="50"></a>
+            <a href="contact.php" class='sub_logo'><img src="image/contact_logo.png" width="50"></a>
         </div>
     </div>
 
