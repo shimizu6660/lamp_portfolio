@@ -1,0 +1,18 @@
+article img{
+    border: 1px solid black;
+    
+}
+article p{
+    border-bottom: 1px solid #DDDDDD;
+    margin-top: 10px;
+}
+.phone img{
+    width: 380px;
+}
+
+article h4{
+    margin-top: 40px;
+}
+article a{
+    margin-bottom: 10px;
+}
