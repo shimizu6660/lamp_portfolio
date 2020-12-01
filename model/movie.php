@@ -132,7 +132,8 @@ function validate_movie($db, $movie_url, $movie_id, $wp_id, $title, $channelTitl
 function is_valid_movie_url($movie_url){
     $is_valid = true;
     $pattren = '/www.youtube.com/';
-    if(preg_match($pattren, $movie_url) === 0){
+    $pattren_app = '/youtu.be/';
+    if(preg_match($pattren, $movie_url) === 0 && preg_match($pattren_app, $movie_url) === 0){
         set_error('YouTubeの動画のURLを入力してください。');
         $is_valid = false;
     }

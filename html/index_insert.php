@@ -23,8 +23,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $wp_id = get_post('wp_id_select');
 
         //youtubeのURLであれば変数に代入。それ以外はエラー。
-        parse_str( parse_url( $movie_url, PHP_URL_QUERY ), $my_array_of_vars );
-        $movie_id = $my_array_of_vars['v'];
+        if (strpos($movie_url, "watch") != false)	/* ページURL ? */
+        {
+            /** コード変換 */
+            $movie_id = substr($movie_url, (strpos($movie_url, "=")+1));
+        }
+        else
+        {
+            /** 短縮URL用に変換 */
+            $movie_id = substr($movie_url, (strpos($movie_url, "youtu.be/")+9));
+        }
 
         //APIでアップロード時間を取得し、挿入
             $api_key = youtubeAPI;
