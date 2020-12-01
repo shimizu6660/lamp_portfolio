@@ -4,11 +4,13 @@ header{
     border-bottom: solid 1px #DDDDDD;
     /*margin-bottom: 10px;*/
 }
-.contact_logo{
-    position: absolute;
-right: 0;
-bottom: 0;
-}
 .contact{
     position: relative;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 15px;
+}
+.sub_logo{
+    margin-right: 5px;
 }
