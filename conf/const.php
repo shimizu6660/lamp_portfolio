@@ -14,4 +14,5 @@ define('DB_PASS', 'password');
 define('DB_CHARSET', 'utf8');
 
 define('youtubeAPI', '');
+
 ?>
