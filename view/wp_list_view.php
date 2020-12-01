@@ -11,13 +11,15 @@ header('X-FRAME-OPTIONS: DENY');
 </head>
 <body>
     <?php include VIEW_PATH . 'templates/header.php'; ?>
-<main class="row">
+<main class="">
 <div class="col-sm-2">
     <?php include HTML_PATH . 'navi.php'; ?>
 </div>
 <div class="col-sm-10">
     <article>
-        <?php include VIEW_PATH . 'templates/movie_url_form.php'; ?> <!--URLのフォームを読み込み-->
+        <div class="form_display">
+            <?php include VIEW_PATH . 'templates/movie_url_form.php'; ?> <!--URLのフォームを読み込み-->
+        </div>
             <p class="wp_title"><?php print(h($get_wp_id['wp_name'])); ?></p>
             <?php if(($table_col) === 0){ ?>
                 <p>まだ登録がありません</p>

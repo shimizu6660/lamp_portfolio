@@ -12,8 +12,8 @@ article{
     margin-top:10px;
     margin: 10px 0 auto;
     width: auto;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .form_box{
     background-color: #EEEEEE;
@@ -32,3 +32,10 @@ article img{
     max-width: 100%;
     height: auto;
 }
+
+/*横480px以下の時はフォームメニューを隠す*/
+@media screen and (max-width: 1000px){
+    .col-sm-2{
+      display: none;
+    }
+  }
