@@ -14,3 +14,16 @@ header{
 .sub_logo{
     margin-right: 5px;
 }
+.header_navi{
+    position: relative;
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+    top: 5px;
+}
+
+@media screen and (max-width: 1000px){
+    .sub_logo{
+      display: none;
+    }
+  }

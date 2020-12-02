@@ -20,7 +20,7 @@
     gtag('config', 'G-KJJLB8N9FV');
     </script>
 </head>
-<header>
+<header class="fixed-top">
     <div class="header_box">
         <a href="index.php"><img class='title_logo' src="image/title_logo.png" width="200"></a>
     </div>
@@ -28,17 +28,20 @@
         <div class="contact">
             <a href="how_to_use.php" class='sub_logo'><img src="image/how_to_use_logo.png" width="50"></a>
             <a href="contact.php" class='sub_logo'><img src="image/contact_logo.png" width="50"></a>
-        </div>
-    </div>
-
-    <div class="header_navi">
-        <div id="nav-drawer">
-            <input id="nav-input" type="checkbox" class="nav-unshown">
-            <label id="nav-open" for="nav-input"><span></span></label>
-            <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-            <div id="nav-content">
-                <?php include HTML_PATH . 'header_navi.php'; ?>
+            <div class="header_navi">
+                <div id="nav-drawer">
+                    <input id="nav-input" type="checkbox" class="nav-unshown">
+                    <label id="nav-open" for="nav-input"><span></span></label>
+                    <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+                    <div id="nav-content">
+                        <a href="how_to_use.php" class=''><img src="image/how_to_use_logo.png" width="50"></a>
+                        <a href="contact.php" class=''><img src="image/contact_logo.png" width="50"></a>
+                        <?php include HTML_PATH . 'header_navi.php'; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    
 </header>
