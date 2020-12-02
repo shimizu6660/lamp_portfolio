@@ -6,6 +6,8 @@ main {
     /*float: left;
     width: 25%;*/
     display: flex;   
+    position: relative;
+    top: 70px;
 }
 
 article{
